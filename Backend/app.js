@@ -1,7 +1,15 @@
 // app.js
 const express = require("express");
 const app = express();
+// const { pool } = require("./db.js");
 const { Pool } = require("pg");
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "postgres",
+  password: "123456",
+  port: 5432,
+});
 // const employeeRoutes = require("./routes/Employeeroutes");
 // const departmentRoutes = require("./routes/departementprojectroutes");
 const accountDetailsRoutes = require("./routes/AccountDetailsRoutes");
@@ -14,22 +22,22 @@ const accountDetailsRoutes = require("./routes/AccountDetailsRoutes");
 // const employeeAttendanceRoutes = require("./routes/employeeAttendanceRoutes");
 // const workLocationRoutes = require("./routes/worklocationroutes");
 
-app.use("/webprms");
-app.use(errorMiddleware);
+// app.use("/webprms");
+// app.use(errorMiddleware);
 
-mongoose
-  .connect("mongodb://127.0.0.1:27017/webrpms")
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Listening on Port ${PORT}`);
-    });
-    console.log("MongoDB Connected");
-  })
-  .catch((err) => console.log(err));
+// mongoose
+//   .connect("mongodb://127.0.0.1:27017/webrpms")
+//   .then(() => {
+//     app.listen(PORT, () => {
+//       console.log(`Listening on Port ${PORT}`);
+//     });
+//     console.log("MongoDB Connected");
+//   })
+//   .catch((err) => console.log(err));
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 // app.use("/api", employeeRoutes);
 
 // app.use("/api", departmentRoutes);
@@ -66,5 +74,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-module.exports = pool;
